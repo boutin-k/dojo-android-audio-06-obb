@@ -2,17 +2,32 @@
 
 ## But du TD
 Quand une application fait plus de 100Mo, Google conseil d'utiliser des fichiers OBB pour externaliser les ressources.
-Nous allons voir comment générer un OBB et comment l'intégrer dans le projet.
+Nous allons voir comment générer une archive OBB et comment l'intégrer dans un projet.
 
 ## Etapes
 ### Créer un projet
 Créer un projet basé sur le template *Empty Activity*
 
 ### Créer un fichier OBB
-1. Tu vas créer un fichier OBB disposant du contenu du zip content/content.zip.
-2. Ensuite, tu devras implémenter un *StorageManager* pour transformer l'OBB en point de montage.   
-3. Bacule le contenu du fichier *data.json* se trouvant dans l'OBB vers le TextView de l'Activity.
+* Tu vas [créer un fichier OBB](https://developer.android.com/studio/command-line/jobb) disposant du contenu du fichier zip *content.zip*.
+* Le nom du fichier devra respecter le format suivant :
+```main.<expansion-version>.<package-name>.obb``` 
+* Une fois créé, il faudra le mettre dans le *device* à l'emplacement suivant :
+```storage/emulated/0/Android/obb/<package-name>/```
 
+Pour copier un fichier dans le *device* on peut utiliser l'outil [adb](https://developer.android.com/studio/command-line/adb). 
+* Voici la ligne à taper dans un terminal pour copier le fichier :
+```adb push main.<expansion-version>.<package-name>.obb /storage/emulated/0/Android/obb/<package-name>/```
+
+### StorageManager
+* Ensuite, tu devras implémenter un [StorageManager](https://developer.android.com/reference/android/os/storage/StorageManager) pour transformer l'OBB en point de montage.   
+* Une fois monté, bascule le contenu du fichier *data.json* de l'OBB vers le TextView de l'Activity.
+
+N'oublie pas d'ajouter les autorisations suivantes dans le fichier AndroidManifest.xml
+```java
+<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>  
+<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+```
 ## Documentation
 * [Create OBB File](https://developer.android.com/studio/command-line/jobb)
 * [APK Expansion Files](https://developer.android.com/google/play/expansion-files)

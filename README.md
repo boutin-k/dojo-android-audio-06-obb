@@ -33,3 +33,6 @@ N'oublie pas d'ajouter les autorisations suivantes dans le fichier AndroidManife
 * [APK Expansion Files](https://developer.android.com/google/play/expansion-files)
 * [StorageManager](https://developer.android.com/reference/android/os/storage/StorageManager)
 * [getObbDir](https://developer.android.com/reference/android/content/Context.html#getObbDir())
+
+## TD suivant
+* [JSON](https://github.com/boutin-k/dojo-android-audio-07-json)
